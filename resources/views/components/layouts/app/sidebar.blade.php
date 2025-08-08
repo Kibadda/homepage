@@ -12,9 +12,7 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group expandable heading="Memories" class="grid">
-                    <flux:navlist.item icon="calendar-days" :href="route('memories.timeline')" :current="request()->routeIs('memories.timeline')" wire:navigate>Timeline</flux:navlist.item>
-                </flux:navlist.group>
+                <flux:navlist.item icon="calendar-days" :href="route('timelines.index')" :current="Str::startsWith(request()->url(), route('timelines.index'))" wire:navigate>{{ __('Memories') }}</flux:navlist.item>
             </flux:navlist>
 
             <flux:spacer />
@@ -59,7 +57,7 @@
                         <form method="POST" action="{{ route('logout') }}" class="w-full">
                             @csrf
                             <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
-                                {{ __('Log Out') }}
+                                {{ __('Logout') }}
                             </flux:menu.item>
                         </form>
                     </flux:menu>

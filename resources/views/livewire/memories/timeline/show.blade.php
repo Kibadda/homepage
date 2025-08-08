@@ -1,11 +1,15 @@
 <div class="flex h-full w-full flex-1 flex-col gap-6">
     <div class="flex items-center justify-between">
-        <flux:heading size="xl">Memories Timeline</flux:heading>
+        <flux:heading size="xl">{{ $timeline->title }}</flux:heading>
 
         <flux:button variant="primary" icon="plus" wire:click="openCreateModal">
-            Add Memory
+            {{ __('Add Memory') }}
         </flux:button>
     </div>
+
+    <flux:text>
+        {{ $timeline->description }}
+    </flux:text>
 
     <div class="relative">
         <div class="absolute transform -translate-x-1/4 w-0.5 bg-zinc-200 dark:bg-zinc-700 h-full"></div>
@@ -32,7 +36,7 @@
                                             $diff = floor($memory->date->diffInDays(now()));
                                         @endphp
 
-                                        {{ $memory->date->format('d.m.Y') }} @if($diff > 0) - {{ $diff }} {{ $diff === 1 ? 'day' : 'days' }} ago @endif
+                                        {{ $memory->date->format('d.m.Y') }} @if($diff > 0) - {{ trans_choice('timediff', $diff, ['days' => $diff]) }} @endif
                                     </flux:text>
 
                                     @if($memory->description)
@@ -74,7 +78,7 @@
 
                 <flux:modal :name="'edit-memory-'.$memory->id" variant="flyout">
                     <div class="flex items-center justify-between mb-6">
-                        <flux:heading size="lg">Edit Memory</flux:heading>
+                        <flux:heading size="lg">{{ __('Edit Memory') }}</flux:heading>
                     </div>
 
                     <form wire:submit="editMemory" class="space-y-6" enctype="multipart/form-data">
@@ -82,27 +86,25 @@
 
                         <flux:input
                             wire:model="title"
-                            label="Title"
-                            placeholder="Give your memory a title..."
+                            :label="__('Title')"
                         />
 
                         <flux:textarea
                             wire:model="description"
-                            label="Description"
-                            placeholder="Tell the story behind this memory..."
+                            :label="__('Description')"
                             rows="4"
                         />
 
                         <div wire:ignore>
                             <flux:input
                                 wire:model="image"
-                                label="Image"
+                                :label="__('Image')"
                                 type="file"
                                 accept="image/jpeg,image/png,image/jpg,image/gif"
                             />
                         </div>
                         <div wire:loading wire:target="image" class="text-sm text-blue-600">
-                            Uploading image...
+                            {{ __('Uploading image') }}
                         </div>
                         @error('image')
                             <flux:error>{{ $message }}</flux:error>
@@ -110,7 +112,7 @@
 
                         <flux:input
                             wire:model="date"
-                            label="Date"
+                            :label="__('Date')"
                             type="date"
                         />
 
@@ -120,7 +122,7 @@
                                     type="button"
                                     variant="ghost"
                                 >
-                                    Cancel
+                                    {{ __('Cancel') }}
                                 </flux:button>
                             </flux:modal.close>
 
@@ -128,7 +130,7 @@
                                 type="submit"
                                 variant="primary"
                             >
-                                Edit Memory
+                                {{ __('Save') }}
                             </flux:button>
                         </div>
                     </form>
@@ -136,7 +138,7 @@
 
                 <flux:modal :name="'delete-memory-'.$memory->id">
                     <div class="flex items-center justify-between mb-6">
-                        <flux:heading size="lg">Delete Memory</flux:heading>
+                        <flux:heading size="lg">{{ __('Delete Memory') }}</flux:heading>
                     </div>
 
                     <flux:text class="mt-2">
@@ -149,12 +151,12 @@
                                 type="button"
                                 variant="ghost"
                             >
-                                Cancel
+                                {{ __('Cancel') }}
                             </flux:button>
                         </flux:modal.close>
 
                         <flux:button variant="danger" wire:click="deleteMemory({{ $memory }})">
-                            Delete Memory
+                            {{ __('Delete') }}
                         </flux:button>
                     </div>
                 </flux:modal>
@@ -164,33 +166,31 @@
 
     <flux:modal name="create-memory" variant="flyout">
         <div class="flex items-center justify-between mb-6">
-            <flux:heading size="lg">Create New Memory</flux:heading>
+            <flux:heading size="lg">{{ __('Add Memory') }}</flux:heading>
         </div>
 
         <form wire:submit="createMemory" class="space-y-6" enctype="multipart/form-data">
             <flux:input
                 wire:model="title"
-                label="Title"
-                placeholder="Give your memory a title..."
+                :label="__('Title')"
             />
 
             <flux:textarea
                 wire:model="description"
-                label="Description"
-                placeholder="Tell the story behind this memory..."
+                :label="__('Description')"
                 rows="4"
             />
 
             <div wire:ignore>
                 <flux:input
                     wire:model="image"
-                    label="Image"
+                    :label="__('Image')"
                     type="file"
                     accept="image/jpeg,image/png,image/jpg,image/gif"
                 />
             </div>
             <div wire:loading wire:target="image" class="text-sm text-blue-600">
-                Uploading image...
+                {{ __('Uploading image') }}
             </div>
             @error('image')
                 <flux:error>{{ $message }}</flux:error>
@@ -198,7 +198,7 @@
 
             <flux:input
                 wire:model="date"
-                label="Date"
+                :label="__('Date')"
                 type="date"
             />
 
@@ -208,7 +208,7 @@
                         type="button"
                         variant="ghost"
                     >
-                        Cancel
+                        {{ __('Cancel') }}
                     </flux:button>
                 </flux:modal.close>
 
@@ -216,7 +216,7 @@
                     type="submit"
                     variant="primary"
                 >
-                    Create Memory
+                    {{ __('Save') }}
                 </flux:button>
             </div>
         </form>

@@ -21,8 +21,8 @@ class Memory extends Model
         'date' => 'date',
     ];
 
-    public function user(): BelongsTo
+    public function timeline(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Timeline::class);
     }
 }

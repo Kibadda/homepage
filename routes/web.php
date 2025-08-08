@@ -8,7 +8,8 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware('auth')->group(function () {
-    Route::get('memories/timeline', Timeline::class)->name('memories.timeline');
+    Route::get('erinnerungen', Timeline\Index::class)->name('timelines.index');
+    Route::get('erinnerungen/{timeline}', Timeline\Show::class)->name('timelines.show');
 });
 
 require __DIR__ . '/auth.php';

@@ -1,0 +1,22 @@
+{
+  "Memories": "Erinnerungen",
+  "Add Timeline": "Neuer Zeitstrahl",
+  "Edit Timeline": "Zeistrahl bearbeiten",
+  "Delete Timeline": "Zeitstrahl löschen",
+  "Add Memory": "Neue Erinnerung",
+  "Edit Memory": "Erinnerung bearbeiten",
+  "Delete Memory": "Erinnerung löschen",
+
+  "Cancel": "Abbrechen",
+  "Save": "Speichern",
+  "Delete": "Löschen",
+
+  "Title": "Titel",
+  "Description": "Beschreibung",
+  "Image": "Bild",
+  "Date": "Datum",
+
+  "Settings": "Einstellungen",
+
+  "timediff": "{1} vor 1 Tag|[2,*] vor :days Tagen"
+}
